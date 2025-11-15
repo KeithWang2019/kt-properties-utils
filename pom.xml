@@ -1,12 +1,28 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.cangsg.brick</groupId>
   <artifactId>kt-properties-utils</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.3-SNAPSHOT</version>
+  <version>1.0.0</version>
   <name>kt-properties-utils</name>
   <description>积木组件的一部分，通用工具类深度复制两个对象的同名属性，支持值类型不匹配时map处理，支持 Java 8+</description>
   <url>https://github.com/KeithWang2019</url>
+
+  <!-- 1. 开发者信息（必填） -->
+  <developers>
+    <developer>
+      <id>KeithWang</id>
+      <name>藏书君</name>
+      <email>gg_happy@163.com</email>
+      <url>https://github.com/KeithWang2019</url>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>+8</timezone>
+    </developer>
+  </developers>
 
   <organization>
     <name>藏书君</name>
@@ -22,7 +38,7 @@
     <!-- 开发者可写连接（通常是 SSH 地址，供你推送代码） -->
     <developerConnection>scm:git:git@github.com:KeithWang2019/kt-properties-utils.git</developerConnection>
     <!-- 当前标签（默认 HEAD，release 插件会自动替换为发布标签） -->
-    <tag>kt-properties-utils-1.0.0</tag>
+    <tag>kt-properties-utils-1.0.3</tag>
   </scm>
 
   <licenses>
@@ -53,19 +69,19 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>5.9.2</version>
+      <version>5.13.4</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.9.2</version>
+      <version>5.13.4</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.hamcrest</groupId>
       <artifactId>hamcrest</artifactId>
-      <version>2.2</version>
+      <version>3.0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -75,7 +91,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.14.0</version>
+        <version>3.14.1</version>
         <configuration>
           <annotationProcessorPaths>
             <path>
@@ -90,14 +106,14 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
-        <version>3.1.0</version>
+        <version>3.2.8</version>
         <executions>
           <execution>
             <id>sign-artifacts</id>
             <phase>verify</phase>
             <goals>
               <goal>sign</goal>
-            </goals>
+            </goals>           
           </execution>
         </executions>
       </plugin>
@@ -105,11 +121,11 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
-        <version>3.2.1</version>
+        <version>3.3.1</version>
         <executions>
           <execution>
             <id>attach-sources</id>
-            <phase>verify</phase>
+            <phase>package</phase>
             <goals>
               <goal>jar-no-fork</goal>
             </goals>
@@ -120,11 +136,11 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.4.1</version>
+        <version>3.11.3</version>
         <executions>
           <execution>
             <id>attach-javadocs</id>
-            <phase>verify</phase>
+            <phase>package</phase>
             <goals>
               <goal>jar</goal>
             </goals>
@@ -137,22 +153,29 @@
           </execution>
         </executions>
       </plugin>
-
-      <!-- 5.4 Release 插件（核心：版本管理、发布） -->
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>3.0.1</version>
+        <groupId>org.sonatype.central</groupId>
+        <artifactId>central-publishing-maven-plugin</artifactId>
+        <version>0.9.0</version>
+        <extensions>true</extensions>
         <configuration>
-          <autoVersionSubmodules>true</autoVersionSubmodules> <!-- 多模块项目自动同步版本 -->
-          <useReleaseProfile>false</useReleaseProfile>
-          <releaseProfiles>ossrh</releaseProfiles> <!-- 关联 settings.xml 中的 profile -->
-          <goals>deploy</goals> <!-- 发布目标：部署到仓库 -->
-          <scmCommentPrefix>[RELEASE]</scmCommentPrefix> <!-- Git 提交注释前缀 -->
+          <publishingServerId>ossrh</publishingServerId>
         </configuration>
       </plugin>
     </plugins>
   </build>
 
-
+  <!-- 核心：添加部署仓库配置 -->
+  <distributionManagement>
+    <!-- 正式版本仓库（Sonatype OSSRH 临时仓库，用于 Staging） -->
+    <repository>
+      <id>ossrh</id> <!-- 必须与 settings.xml 中 server.id 一致 -->
+      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+    <!-- 快照版本仓库（可选，用于测试版本部署） -->
+    <snapshotRepository>
+      <id>ossrh</id> <!-- 与正式仓库 ID 一致 -->
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
 </project>
