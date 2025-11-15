@@ -175,6 +175,8 @@ System.out.println(target.getAge()); // 输出：26
 - 需动态映射或第三方类拷贝：KtPropertiesUtils 或 Orika 均可
 - 重视编译时校验：优先 MapStruct
 
+### 理念推广：属性复制工具 [KtPropertiesUtils](https://github.com/KeithWang2019/kt-properties-utils) 工具，特殊理念，请详读内容，了解为什么允许性能损失，并且正式上线前请做好相关测试。
+
 ## License
 
 [MIT](LICENSE)
