@@ -1,0 +1,18 @@
+{
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-21",
+            "path": "D:\\opt\\jdk-21",
+            "default": true
+        }
+    ],
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "terminal.integrated.env.windows": {
+        "JAVA_HOME": "D:\\opt\\jdk-21"
+    },
+    "maven.view": "hierarchical",
+    "java.dependency.packagePresentation": "hierarchical",
+    "maven.terminal.useJavaHome": true,
+    "java.jdt.ls.java.home": "D:\\opt\\jdk-21"
+}
