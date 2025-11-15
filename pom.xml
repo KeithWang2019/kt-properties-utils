@@ -5,7 +5,7 @@
   <groupId>com.cangsg.brick</groupId>
   <artifactId>kt-properties-utils</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.0</version>
+  <version>1.0.0-SNAPSHOT</version>
   <name>kt-properties-utils</name>
   <description>积木组件的一部分，通用工具类深度复制两个对象的同名属性，支持值类型不匹配时map处理，支持 Java 8+</description>
   <url>https://github.com/KeithWang2019</url>
@@ -14,6 +14,18 @@
     <name>藏书君</name>
     <url>https://github.com/KeithWang2019</url>
   </organization>
+
+  <!-- 新增 SCM 配置（核心解决报错） -->
+  <scm>
+    <!-- 项目的公开访问地址（如 GitHub 仓库页面） -->
+    <url>https://github.com/KeithWang2019/kt-properties-utils.git</url>
+    <!-- 只读连接（供他人拉取代码，scm:协议 + 仓库地址） -->
+    <connection>scm:git:https://github.com/KeithWang2019/kt-properties-utils.git</connection>
+    <!-- 开发者可写连接（通常是 SSH 地址，供你推送代码） -->
+    <developerConnection>scm:git:git@github.com:KeithWang2019/kt-properties-utils.git</developerConnection>
+    <!-- 当前标签（默认 HEAD，release 插件会自动替换为发布标签） -->
+    <tag>HEAD</tag>
+  </scm>
 
   <licenses>
     <license>
@@ -76,6 +88,85 @@
           </annotationProcessorPaths>
         </configuration>
       </plugin>
+      <!-- 5.1 GPG 签名插件（中央仓库强制） -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- 5.2 源码插件（中央仓库强制，需提供源码包） -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.2.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- 5.3 文档插件（中央仓库强制，需提供 Javadoc 包） -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.4.1</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <!-- 忽略 Javadoc 警告（可选） -->
+            <configuration>
+              <additionalJOptions>
+                <additionalJOption>-Xdoclint:none</additionalJOption>
+              </additionalJOptions>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- 5.4 Release 插件（核心：版本管理、发布） -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>3.0.1</version>
+        <configuration>
+          <autoVersionSubmodules>true</autoVersionSubmodules> <!-- 多模块项目自动同步版本 -->
+          <useReleaseProfile>false</useReleaseProfile>
+          <releaseProfiles>ossrh</releaseProfiles> <!-- 关联 settings.xml 中的 profile -->
+          <goals>deploy</goals> <!-- 发布目标：部署到仓库 -->
+          <scmCommentPrefix>[RELEASE]</scmCommentPrefix> <!-- Git 提交注释前缀 -->
+        </configuration>
+      </plugin>
     </plugins>
   </build>
+
+  <!-- 6. 发布仓库配置 -->
+  <distributionManagement>
+    <!-- 正式版本仓库（Sonatype OSSRH） -->
+    <repository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+    <!-- 快照版本仓库（可选，用于测试） -->
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
 </project>
