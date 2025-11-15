@@ -26,6 +26,16 @@ KtPropertiesUtils 是一套 **Java 高性能对象属性深拷贝框架**，专�
 - 轻量级设计，部署包体积小，不增加集群资源负担
 
 ## 快速开始
+
+### 0. 安装
+```xml
+<dependency>
+        <groupId>com.cangsg.brick</groupId>
+        <artifactId>kt-properties-utils</artifactId>
+        <version>1.0.0</version>
+</dependency>
+```
+
 ### 1. 依赖引入
 （若项目已集成相关包，无需额外引入；否则需确保以下核心类在类路径中）
 
