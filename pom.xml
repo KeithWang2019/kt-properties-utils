@@ -3,11 +3,11 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.cangsg.brick</groupId>
-  <artifactId>kt-properties-utils</artifactId>
+  <artifactId>kt-validate-utils</artifactId>
   <packaging>jar</packaging>
   <version>1.0.0</version>
-  <name>kt-properties-utils</name>
-  <description>积木组件的一部分，通用工具类深度复制两个对象的同名属性，支持值类型不匹配时map处理，支持 Java 8+</description>
+  <name>kt-validate-utils</name>
+  <description>积木组件的一部分，通用工具类校验对象的属性值是否合理，支持 Java 8+</description>
   <url>https://github.com/KeithWang2019</url>
 
   <!-- 1. 开发者信息（必填） -->
@@ -32,19 +32,19 @@
   <!-- 新增 SCM 配置（核心解决报错） -->
   <scm>
     <!-- 项目的公开访问地址（如 GitHub 仓库页面） -->
-    <url>https://github.com/KeithWang2019/kt-properties-utils.git</url>
+    <url>https://github.com/KeithWang2019/kt-validate-utils.git</url>
     <!-- 只读连接（供他人拉取代码，scm:协议 + 仓库地址） -->
     <connection>scm:git:https://github.com/KeithWang2019/kt-properties-utils.git</connection>
     <!-- 开发者可写连接（通常是 SSH 地址，供你推送代码） -->
-    <developerConnection>scm:git:git@github.com:KeithWang2019/kt-properties-utils.git</developerConnection>
+    <developerConnection>scm:git:git@github.com:KeithWang2019/kt-validate-utils.git</developerConnection>
     <!-- 当前标签（默认 HEAD，release 插件会自动替换为发布标签） -->
-    <tag>kt-properties-utils-1.0.3</tag>
+    <tag>kt-validate-utils-1.0.3</tag>
   </scm>
 
   <licenses>
     <license>
       <name>MIT License</name> <!-- 许可证名称 -->
-      <url>https://github.com/KeithWang2019/kt-properties-utils/blob/master/LICENSE</url>
+      <url>https://github.com/KeithWang2019/kt-validate-utils/blob/master/LICENSE</url>
       <distribution>repo</distribution>
       <comments />
     </license>
@@ -64,6 +64,11 @@
       <artifactId>lombok</artifactId>
       <optional>true</optional>
       <version>1.18.38</version>
+    </dependency>
+    <dependency>
+      <groupId>com.cangsg.brick</groupId>
+      <artifactId>kt-base-utils</artifactId>
+      <version>1.0.0</version>
     </dependency>
 
     <dependency>
