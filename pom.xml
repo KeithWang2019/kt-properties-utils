@@ -66,7 +66,7 @@
       <version>1.18.38</version>
     </dependency>
     <dependency>
-      <groupId>com.cangsg.brick</groupId>
+      <groupId>com.cangsg.brick</groupId> 
       <artifactId>kt-base-utils</artifactId>
       <version>1.0.0</version>
     </dependency>
