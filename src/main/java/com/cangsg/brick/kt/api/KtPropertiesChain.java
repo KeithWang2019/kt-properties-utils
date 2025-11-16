@@ -21,6 +21,8 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.cangsg.brick.kt.base.KtBeanUtils;
+
 public class KtPropertiesChain<T, V> {
     private KtMapValueHandler mapValueHandler;
     private T source;
@@ -46,7 +48,7 @@ public class KtPropertiesChain<T, V> {
         this.depth = depth;
 
         this.actualEditable = target.getClass();
-        this.targetPds = BeanUtils.getPropertyDescriptors(actualEditable);
+        this.targetPds = KtBeanUtils.getPropertyDescriptors(actualEditable);
 
         this.mapTypes = mapTypes;
     }
@@ -75,7 +77,7 @@ public class KtPropertiesChain<T, V> {
         for (PropertyDescriptor targetPd : targetPds) {
             Method writeMethod = targetPd.getWriteMethod();
             if (writeMethod != null) {
-                PropertyDescriptor sourcePd = BeanUtils.getPropertyDescriptor(source.getClass(), targetPd.getName());
+                PropertyDescriptor sourcePd = KtBeanUtils.getPropertyDescriptor(source.getClass(), targetPd.getName());
                 if (sourcePd != null) {
                     Method readMethod = sourcePd.getReadMethod();
                     if (readMethod != null) {

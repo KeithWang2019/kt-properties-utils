@@ -5,7 +5,7 @@
   <groupId>com.cangsg.brick</groupId>
   <artifactId>kt-properties-utils</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <name>kt-properties-utils</name>
   <description>积木组件的一部分，通用工具类深度复制两个对象的同名属性，支持值类型不匹配时map处理，支持 Java 8+</description>
   <url>https://github.com/KeithWang2019</url>
@@ -64,6 +64,11 @@
       <artifactId>lombok</artifactId>
       <optional>true</optional>
       <version>1.18.38</version>
+    </dependency>
+    <dependency>
+      <groupId>com.cangsg.brick</groupId>
+      <artifactId>kt-base-utils</artifactId>      
+      <version>1.0.0</version>
     </dependency>
 
     <dependency>
